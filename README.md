@@ -59,12 +59,19 @@ should be given using `-framerate 30`.
 
 Commonly used filters:
 
+- Deflicker https://ffmpeg.org/ffmpeg-filters.html#toc-deflicker
+- Overlay https://ffmpeg.org/ffmpeg-filters.html#overlay-1
 - Scale https://ffmpeg.org/ffmpeg-filters.html#scale
 - Crop https://ffmpeg.org/ffmpeg-filters.html#crop
-- Deflicker https://ffmpeg.org/ffmpeg-filters.html#toc-deflicker
 
-Goal; scale and crop videos to fit the desired final resolution
-Perhaps use 
+- Video sizes https://ffmpeg.org/ffmpeg-utils.html#video-size-syntax
+
+
+## Steps
+
+- First deflicker the video to ensure it is equally deflickered for all outputs
+- Then add the watermark (which should not be deflickered)
+- Then scale and crop the videos to fit the desired final resolutions
 
 
 ## Scale video
@@ -91,6 +98,22 @@ Using ffmpeg-python:
         .output('SD.mp4', crf=20, preset='slower', movflags='faststart', pix_fmt='yuv420p')
         .run()
     )
+
+
+## Inspection
+
+Show the commands ffmpeg-python would use:
+
+    .get_args()
+
+By using graphviz the graph from input to output can be shown using:
+
+    .view()
+
+This does require graphviz:
+
+    brew install graphviz
+    pip install graphviz
 
 
 # Old ffmpeg CLI examples
