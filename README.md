@@ -89,15 +89,58 @@ should be devisble by that value. TODO: does it just scale/squish the video or c
 
 Using ffmpeg-python:
 
-    import ffmpeg
-    (ffmpeg
-        .input('APL*.tiff', pattern_type='glob', framerate=24)
-        # .filter_('scale', size='qhd', force_original_aspect_ratio='increase')
+```python
+import ffmpeg
+
+OUTPUT_OPTIONS = {
+    'crf': 20,
+    'preset': 'slower',
+    'movflags': 'faststart',
+    'pix_fmt': 'yuv420p'
+}
+
+BOTTOM_RIGHT = {
+    'x': 'main_w-overlay_w',
+    'y': 'main_h-overlay_h'
+}
+
+watermark = (ffmpeg
+    .input(os.join(__file__, ...))
+)
+
+name = 'D500_'
+pattern = 'APL*.tiff'
+
+input = (ffmpeg
+    .input(pattern, pattern_type='glob', framerate=24)
+    .filter_('deflicker', mode='pm', size=10)
+    .split()
+)
+
+output = ffmpeg.merge_outputs(
+    # 3840x2160
+    input[0]
+        .filter_('scale', size='uhd2160', force_original_aspect_ratio='increase')
+        .overlay(watermark(), **BOTTOM_RIGHT)
+        .output(f'{name}_3840.mp4', **OUTPUT_OPTIONS),
+    # 1920x1080
+    input[1]
         .filter_('scale', size='hd1080', force_original_aspect_ratio='increase')
-        .filter_('deflicker', mode='pm', size=10)
-        .output('SD.mp4', crf=20, preset='slower', movflags='faststart', pix_fmt='yuv420p')
-        .run()
-    )
+        .overlay(watermark, **BOTTOM_RIGHT)
+        .output(f'{name}_1920.mp4', **OUTPUT_OPTIONS),
+    # 960x540
+    input[2]
+        .filter_('scale', size='qhd', force_original_aspect_ratio='increase')
+        .overlay(watermark, **BOTTOM_RIGHT)
+        .output(f'{name}_960.mp4', **OUTPUT_OPTIONS),
+)
+
+# Show command, graph, and produce output.
+' '.join(output.get_args())
+output.view(filename=f'{name}.pdf')
+output..run()
+
+```
 
 
 ## Inspection
