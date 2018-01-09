@@ -6,7 +6,7 @@ RENNER_FONT = os.path.join(os.path.dirname(__file__), 'fonts/Renner-Book.ttf')
 FONT_OPTIONS = {
     'fontfile': RENNER_FONT,
     'fontcolor': 'white',
-    'shadowcolor': 'black',`
+    'shadowcolor': 'black',
     'x': 'main_w-text_w-line_h',
 }
 
