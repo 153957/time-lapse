@@ -1,0 +1,8 @@
+global-exclude __pycache__
+global-exclude *.py[co]
+include .editorconfig
+include Makefile
+include LICENSE
+graft tests
+prune scripts
+recursive-include time_lapse *.ttf
