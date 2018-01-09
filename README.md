@@ -4,6 +4,21 @@ This repo contains scripts used to compile Time-lapse movies using ffmpeg.
 The ffmpeg utility is controlled via the ffmpeg-python wrapper.
 
 
+# Installation
+
+This package requires the `ffmpeg` tool to be installed. Moreover, it should be
+installed with the `--enable-libfreetype` option. Additionally `graphviz`
+should be installed to visually inspect the graph from in to output.  When
+using homebrew use:
+
+    brew install ffmpeg --with-freetype
+    brew install graphviz
+
+Then install this package:
+
+    pip install -e .
+
+
 # Codec
 
 For near-universal compatibility the H.264 codec is used. The following
@@ -60,9 +75,9 @@ should be given using `-framerate 30`.
 Commonly used filters:
 
 - Deflicker https://ffmpeg.org/ffmpeg-filters.html#toc-deflicker
-- Overlay https://ffmpeg.org/ffmpeg-filters.html#overlay-1
 - Scale https://ffmpeg.org/ffmpeg-filters.html#scale
 - Crop https://ffmpeg.org/ffmpeg-filters.html#crop
+- Drawtext https://ffmpeg.org/ffmpeg-filters.html#drawtext-1
 
 - Video sizes https://ffmpeg.org/ffmpeg-utils.html#video-size-syntax
 
