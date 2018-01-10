@@ -30,14 +30,15 @@ setup(
         'graphviz',
     ],
     extras_require={
-        'dev':  [
+        'dev': [
             'check-manifest',
             'coverage',
             'flake8',
             'flake8-bugbear',
             'flake8-isort',
-            'pep8-naming',
             'isort',
+            'pep8-naming',
+            'readme_renderer',
             'twine',
             'wheel',
         ],

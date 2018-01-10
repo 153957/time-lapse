@@ -23,8 +23,8 @@ def create_outputs(input, name, verbose=False, dry_run=False):
 
     output = ffmpeg.merge_outputs(
         # 3840x2160
-        add_watermark(split_input[0]
-            .filter_('scale', size='uhd2160', force_original_aspect_ratio='increase'),
+        add_watermark(
+            split_input[0].filter_('scale', size='uhd2160', force_original_aspect_ratio='increase'),
             fontsize=64
         ).output(f'{name}_3840.mp4', **OUTPUT_OPTIONS),
         # 1920x1080
