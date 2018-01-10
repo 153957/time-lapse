@@ -10,7 +10,7 @@ setup(
     author='Arne de Laat',
     author_email='arne@delaat.net',
     description='Time-lapse movie assembly',
-    long_description='See README.md',
+    long_description=open('README.rst').read(),
     keywords=[
         'ffmpeg',
         'photography',
