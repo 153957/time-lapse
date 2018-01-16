@@ -2,3 +2,5 @@
 /dist/
 /var/
 _build/
+*.mp4
+*.pdf
