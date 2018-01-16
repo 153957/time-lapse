@@ -19,24 +19,21 @@ def create_outputs(input, name, verbose=False, dry_run=False):
     :param dry_run: if True the command will not be run.
 
     """
-    split_input = input.split()
+    watermarked_input = add_watermark(
+        input.filter_('scale', size='hd1080', force_original_aspect_ratio='increase'),
+        fontsize=32
+    )
+
+    split_input = watermarked_input.split()
 
     output = ffmpeg.merge_outputs(
-        # 3840x2160
-        add_watermark(
-            split_input[0].filter_('scale', size='uhd2160', force_original_aspect_ratio='increase'),
-            fontsize=64
-        ).output(f'{name}_3840.mp4', **OUTPUT_OPTIONS),
-        # 1920x1080
-        add_watermark(
-            split_input[1].filter_('scale', size='hd1080', force_original_aspect_ratio='increase'),
-            fontsize=32
-        ).output(f'{name}_1920.mp4', **OUTPUT_OPTIONS),
-        # 960x540
-        add_watermark(
-            split_input[2].filter_('scale', size='qhd', force_original_aspect_ratio='increase'),
-            fontsize=16
-        ).output(f'{name}_960.mp4', **OUTPUT_OPTIONS),
+        # 1920x1080 (1920x1280)
+        split_input[0].output(f'{name}_1920.mp4', **OUTPUT_OPTIONS),
+        # 960x540 (960x640)
+        (split_input[1]
+            .filter_('scale', size='qhd', force_original_aspect_ratio='increase')
+            .output(f'{name}_960.mp4', **OUTPUT_OPTIONS)
+        )
     )
 
     if verbose:
