@@ -30,7 +30,8 @@ def create_outputs(input, name, verbose=False, dry_run=False):
         # 1920x1080 (1920x1280)
         split_input[0].output(f'{name}_1920.mp4', **OUTPUT_OPTIONS),
         # 960x540 (960x640)
-        (split_input[1]
+        (
+            split_input[1]
             .filter_('scale', size='qhd', force_original_aspect_ratio='increase')
             .output(f'{name}_960.mp4', **OUTPUT_OPTIONS)
         )
