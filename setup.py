@@ -43,5 +43,10 @@ setup(
             'wheel',
         ],
     },
+    entry_points={
+        'console_scripts': [
+            'timelapse = time_lapse.cli:main'
+        ]
+    },
     test_suite='tests',
 )
