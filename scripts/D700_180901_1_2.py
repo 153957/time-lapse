@@ -8,6 +8,7 @@ PATTERNS = [
     '/Volumes/Falcon/tl_temp/180901/2/*.tiff',  # ADL_242506 - ADL_243212
 ]
 
+
 def make_movie():
     inputs = [
         ffmpeg
