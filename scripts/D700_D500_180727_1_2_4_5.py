@@ -11,6 +11,7 @@ PATTERNS = [
     '/Volumes/Falcon/tl_temp/180727_Moon/5_D700/*.tiff',  # ADL_241162 - ADL_241328
 ]
 
+
 def make_movie():
     inputs = [
         ffmpeg
