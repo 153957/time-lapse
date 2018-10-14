@@ -10,7 +10,7 @@ OUTPUT_OPTIONS = {
 }
 
 
-def create_outputs(input, name, verbose=False, dry_run=False):
+def create_outputs(input, name, framerate=None, verbose=False, dry_run=False):
     """Create output at multiple sizes
 
     :param input: ffmpeg input node ready for scaling and conversion.
@@ -26,14 +26,19 @@ def create_outputs(input, name, verbose=False, dry_run=False):
 
     split_input = watermarked_input.split()
 
+    if framerate:
+        output_options = {'r': framerate, **OUTPUT_OPTIONS}
+    else:
+        output_options = OUTPUT_OPTIONS
+
     output = ffmpeg.merge_outputs(
         # 1920x1080 (1920x1280)
-        split_input[0].output(f'{name}_1920.mp4', **OUTPUT_OPTIONS),
+        split_input[0].output(f'{name}_1920.mp4', **output_options),
         # 960x540 (960x640)
         (
             split_input[1]
             .filter_('scale', size='qhd', force_original_aspect_ratio='increase')
-            .output(f'{name}_960.mp4', **OUTPUT_OPTIONS)
+            .output(f'{name}_960.mp4', **output_options)
         )
     )
 
