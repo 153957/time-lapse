@@ -2,7 +2,7 @@ import ffmpeg
 
 from time_lapse import output
 
-NAME = 'D700_D500_180727_1_2_4_5'
+NAME = os.path.basename(__file__).replace('.py', '')
 PATTERNS = [
     '/Volumes/Falcon/tl_temp/180727_Moon/1_D700/*.tiff',  # ADL_240651 - ADL_240862
     '/Volumes/Falcon/tl_temp/180727_Moon/2_D700/*.tiff',  # ADL_240867 - ADL_241048

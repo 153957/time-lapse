@@ -2,7 +2,7 @@ import ffmpeg
 
 from time_lapse import output
 
-NAME = 'D90_140416_140417_1'
+NAME = os.path.basename(__file__).replace('.py', '')
 PATTERN1 = '/Volumes/Falcon/tl_temp/140416_1/*.tiff'
 PATTERN2 = '/Volumes/Falcon/tl_temp/140417_1/*.tiff'
 
