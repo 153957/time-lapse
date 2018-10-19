@@ -1,3 +1,5 @@
+import os
+
 import ffmpeg
 
 from time_lapse import output
