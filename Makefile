@@ -3,7 +3,7 @@ PHONY: test devinstall flaketests checkmanifest checksetup clean build release
 test: flaketests checkmanifest checksetup
 
 devinstall:
-	pip install -e .[dev]
+	pip install --upgrade --upgrade-strategy eager -e .[dev]
 
 flaketests:
 	flake8
