@@ -38,6 +38,7 @@ setup(
             'flake8-isort',
             'isort',
             'pep8-naming',
+            'Pillow',
             'readme_renderer',
             'twine',
             'wheel',
