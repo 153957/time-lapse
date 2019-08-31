@@ -47,6 +47,6 @@ def create_outputs(input, name, framerate=None, verbose=False, dry_run=False):
         output.view(filename=f'{name}')  # Automatically suffixed with .pdf
 
     if not dry_run:
-        output.run(overwrite_output=True)
+        output.global_args('-hide_banner').run(overwrite_output=True)
 
     return output
