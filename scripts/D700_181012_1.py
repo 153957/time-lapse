@@ -8,6 +8,7 @@ NAME = os.path.basename(__file__).replace('.py', '')
 PATTERNS = [
     '/Volumes/Falcon/tl_temp/181012_1/*.tiff',  # ADL_243737 - ADL_244687
 ]
+# poster: ADL_244569
 
 
 def make_movie():
