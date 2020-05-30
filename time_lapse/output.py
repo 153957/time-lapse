@@ -10,21 +10,25 @@ OUTPUT_OPTIONS = {
 }
 
 
-def create_outputs(input, name, framerate=None, verbose=False, dry_run=False):
+def create_outputs(input, name, framerate=None, verbose=False, dry_run=False, watermark=True):
     """Create output at multiple sizes
 
     :param input: ffmpeg input node ready for scaling and conversion.
     :param name: name of the output.
     :param verbose: if True output the ffmpeg CLI command which will be used.
     :param dry_run: if True the command will not be run.
+    :param watermark: if True a watermark will be added to the movie.
 
     """
-    watermarked_input = add_watermark(
-        input.filter_('scale', size='hd1080', force_original_aspect_ratio='increase'),
-        fontsize=32
-    )
+    if watermark:
+        watermarked_input = add_watermark(
+            input.filter_('scale', size='hd1080', force_original_aspect_ratio='increase'),
+            fontsize=32
+        )
 
-    split_input = watermarked_input.split()
+        split_input = watermarked_input.split()
+    else:
+        split_input = input.split()
 
     if framerate:
         output_options = {'r': framerate, **OUTPUT_OPTIONS}
