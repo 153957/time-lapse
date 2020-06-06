@@ -10,8 +10,17 @@ OUTPUT_OPTIONS = {
 }
 
 
-def create_outputs(input, name, framerate=None, verbose=False, dry_run=False, watermark=True):
-    """Create output at multiple sizes
+def create_outputs(
+    input,
+    name,
+    framerate=None,
+    verbose=False,
+    dry_run=False,
+    watermark=True,
+    text='Arne de Laat',
+    subtext='153957 Photography',
+):
+    """Create output at multiple sizes (FHD and qHD)
 
     :param input: ffmpeg input node ready for scaling and conversion.
     :param name: name of the output.
@@ -20,15 +29,13 @@ def create_outputs(input, name, framerate=None, verbose=False, dry_run=False, wa
     :param watermark: if True a watermark will be added to the movie.
 
     """
-    if watermark:
-        watermarked_input = add_watermark(
-            input.filter_('scale', size='hd1080', force_original_aspect_ratio='increase'),
-            fontsize=32
-        )
+    fhd_input = input.filter_('scale', size='hd1080', force_original_aspect_ratio='increase')
 
+    if watermark:
+        watermarked_input = add_watermark(fhd_input, text, subtext, fontsize=32)
         split_input = watermarked_input.split()
     else:
-        split_input = input.split()
+        split_input = fhd_input.split()
 
     if framerate:
         output_options = {'r': framerate, **OUTPUT_OPTIONS}

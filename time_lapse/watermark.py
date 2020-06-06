@@ -9,7 +9,7 @@ FONT_OPTIONS = {
 }
 
 
-def add_watermark(input, text='Arne de Laat', subtext='153957 Photography', fontsize=32):
+def add_watermark(input, text, subtext, fontsize=32):
     watermarked_input = (
         input
         .drawtext(text=text, fontsize=fontsize, y='main_h-3*line_h', **FONT_OPTIONS)
