@@ -6,7 +6,7 @@ from time_lapse import output
 
 NAME = os.path.basename(__file__).replace('.py', '')
 PATTERNS = [
-    '/Volumes/Archive/Other/Time-lapse Wen/timelapse_bloem_wen/Output/200530_D810_bloem/WEN_*.tif', # WEN_D810_ - WEN_D810_
+    '/Volumes/Archive/Other/Time-lapse Wen/timelapse_bloem_wen/Output/200530_D810_bloem/WEN_*.tif',  # WEN_D810_ - WEN_D810_
 ]
 
 
