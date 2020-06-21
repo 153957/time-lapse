@@ -8,12 +8,11 @@ ffmpeg. The ffmpeg utility is controlled via the ffmpeg-python wrapper.
 Installation
 ============
 
-This package requires the ``ffmpeg`` tool to be installed. Moreover, it
-should be installed with the ``--enable-libfreetype`` option.
+This package requires the ``ffmpeg`` tool to be installed.
 Additionally ``graphviz`` should be installed to visually inspect the
 graph from in to output. When using homebrew use::
 
-    brew install ffmpeg --with-freetype
+    brew install ffmpeg
     brew install graphviz
 
 Then install this package::
