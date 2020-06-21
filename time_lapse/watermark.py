@@ -1,8 +1,8 @@
 import os
 
-RENNER_FONT = os.path.join(os.path.dirname(__file__), 'fonts/Renner-Book.ttf')
+JOST_FONT = os.path.join(os.path.dirname(__file__), 'fonts/Jost-400-Book.ttf')
 FONT_OPTIONS = {
-    'fontfile': RENNER_FONT,
+    'fontfile': JOST_FONT,
     'fontcolor': 'white',
     'shadowcolor': 'black',
     'x': 'main_w-text_w-line_h',
