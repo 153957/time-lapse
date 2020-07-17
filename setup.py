@@ -1,4 +1,8 @@
+import pathlib
+
 from setuptools import find_packages, setup
+
+readme = pathlib.Path(__file__).parent.joinpath('README.rst').read_text()
 
 setup(
     name='time-lapse',
@@ -10,7 +14,7 @@ setup(
     author='Arne de Laat',
     author_email='arne@delaat.net',
     description='Time-lapse movie assembly',
-    long_description=open('README.rst').read(),
+    long_description=readme,
     keywords=[
         'ffmpeg',
         'photography',
@@ -21,25 +25,24 @@ setup(
         'Intended Audience :: Other Audience',
         'License :: OSI Approved :: MIT License',
         'Programming Language :: Python',
-        'Programming Language :: Python :: 3.6',
+        'Programming Language :: Python :: 3',
         'Topic :: Multimedia :: Video :: Conversion',
     ],
     license='MIT',
     install_requires=[
         'ffmpeg-python',
-        'graphviz',
     ],
     extras_require={
+        'graph': [
+            'graphviz',
+        ],
         'dev': [
             'check-manifest',
             'coverage',
             'flake8',
             'flake8-bugbear',
             'flake8-isort',
-            'isort',
             'pep8-naming',
-            'Pillow',
-            'readme_renderer',
             'twine',
             'wheel',
         ],

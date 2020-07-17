@@ -9,15 +9,19 @@ Installation
 ============
 
 This package requires the ``ffmpeg`` tool to be installed.
-Additionally ``graphviz`` should be installed to visually inspect the
-graph from in to output. When using homebrew use::
 
     brew install ffmpeg
-    brew install graphviz
 
 Then install this package::
 
-    pip install -e .
+    pip install time-lapse
+
+Additionally, when using the verbose output option a graph will be
+rendered using ``graphviz``, this requires the Graphviz library and
+the related Python package::
+
+    brew install graphviz
+    pip install time-lapse[graph]
 
 
 Codec
