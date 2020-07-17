@@ -9,20 +9,17 @@ flaketests:
 	flake8
 
 checkmanifest:
-	# Check if all files are included in the sdist
 	check-manifest
 
 checksetup:
-	# Check longdescription and metadata
-	python setup.py check -msr
+	python setup.py check -ms
 
 clean:
-	# Remove build/dist dirs
 	rm -rf build dist
 
 build: test clean
-	# Test, clean and build
 	python setup.py sdist bdist_wheel
+	twine check dist/*
 
 release: build
 	twine upload dist/*
