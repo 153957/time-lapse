@@ -30,6 +30,7 @@ setup(
     ],
     license='MIT',
     install_requires=[
+        'exifreader',
         'ffmpeg-python',
     ],
     extras_require={
@@ -49,7 +50,8 @@ setup(
     },
     entry_points={
         'console_scripts': [
-            'timelapse = time_lapse.cli:main'
+            'timelapse = time_lapse.cli:main',
+            'check_interval = time_lapse.check_interval:main',
         ]
     },
     test_suite='tests',
