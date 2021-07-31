@@ -8,9 +8,6 @@ devinstall:
 flaketests:
 	flake8
 
-checkmanifest:
-	check-manifest
-
 checksetup:
 	python setup.py check -ms
 
