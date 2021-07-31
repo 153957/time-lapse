@@ -1,4 +1,7 @@
-PHONY: test devinstall flaketests checkmanifest checksetup clean build release
+.PHONY: demo test devinstall flaketests checkmanifest checksetup clean build release
+
+demo:
+	timelapse --name ./demo/S60_050504 --pattern "./demo/source/*.jpg" --fps 25 --deflicker 7 --quiet
 
 test: flaketests checkmanifest checksetup
 
