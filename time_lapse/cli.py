@@ -5,7 +5,7 @@ import ffmpeg
 from time_lapse import output
 
 
-def make_movie(name, pattern, fps, deflicker):
+def make_movie(name, pattern, fps, deflicker, quiet):
     input = (
         ffmpeg
         .input(pattern, pattern_type='glob', framerate=fps)
@@ -13,7 +13,7 @@ def make_movie(name, pattern, fps, deflicker):
     if deflicker:
         input = input.filter_('deflicker', mode='pm', size=deflicker)
 
-    output.create_outputs(input, name, verbose=True, watermark=False)
+    output.create_outputs(input, name, verbose=quiet, watermark=False)
 
 
 def main():
@@ -41,9 +41,14 @@ def main():
         type=int,
         default=0
     )
+    parser.add_argument(
+        '--quiet',
+        help='Produce less output, i.e. no graph and ffmpeg command',
+        action='store_false',
+    )
     args = parser.parse_args()
 
-    make_movie(args.name, args.pattern, args.fps, args.deflicker)
+    make_movie(args.name, args.pattern, args.fps, args.deflicker, args.quiet)
 
 
 if __name__ == '__main__':
