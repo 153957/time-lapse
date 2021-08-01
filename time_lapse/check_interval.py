@@ -1,6 +1,5 @@
 import argparse
 import datetime
-import functools
 import pathlib
 
 from glob import glob
