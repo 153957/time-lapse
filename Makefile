@@ -1,25 +1,36 @@
-.PHONY: demo test devinstall flaketests checkmanifest checksetup clean build release
-
-demo:
-	timelapse --name ./demo/S60_050504 --pattern "./demo/source/*.jpg" --fps 25 --deflicker 7 --quiet
-
-test: flaketests checkmanifest checksetup
-
+.PHONY: devinstall
 devinstall:
-	pip install --upgrade --upgrade-strategy eager -e .[dev]
+	pip install --upgrade pip
+	pip install --upgrade --upgrade-strategy eager --editable .[dev]
 
-flaketests:
+.PHONY: test
+test: flaketest checksetup unittests
+
+.PHONY: flaketest
+flaketest:
 	flake8
 
+.PHONY: checksetup
 checksetup:
 	python setup.py check -ms
 
+.PHONY: unittests
+unittests:
+	python -m unittest discover --catch --start-directory tests --top-level-directory .
+
+.PHONY: clean
 clean:
 	rm -rf build dist
 
+.PHONY: build
 build: test clean
-	python setup.py sdist bdist_wheel
+	python -m build --sdist --wheel
 	twine check dist/*
 
+.PHONY: release
 release: build
 	twine upload dist/*
+
+.PHONY: demo
+demo:
+	make -C demo/ demo
