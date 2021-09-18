@@ -34,30 +34,28 @@ See the ffmpeg wiki for additional information:
 Constant Rate Factor
 --------------------
 
-Use `-crf 22` to set a constant rate factor, which means the overall
+This uses `-crf 20` to set a constant rate factor, which means the overall
 quality of the movie should be constant. So bitrate varies to ensure
-this. Higher value is slower quality. The quality with 22 seems
-reasonable. Check if it streams nicely to users on slower bandwidth..
-otherwise a high crf (lower quality) might be needed.
+this. Higher value is lower quality. The quality and bit rates at this
+value seem reasonable.
 
 Preset
 ------
 
-Use `-preset slower` to improve the compression ratio for the selected
-quality (crf), without taking too much time. The slower preset is still
-fast enough for me.
+`-preset slower` is used to improve the compression ratio for the selected
+quality (crf), without taking too much time.
 
 Faststart
 ---------
 
-Set `-movflags +faststart` to allow the movie to quickly start playing,
-while it is still loading.
+`-movflags +faststart` is used to allow the movie to quickly start playing,
+while it is still loading or buffering.
 
 Quicktime support
 -----------------
 
 The codec defaults to YUV 444, which is not supported by Quicktime. So
-add `-pix_fmt yuv420p` to fix Quicktime support.
+add `pix_fmt yuv420p` to fix Quicktime support.
 
 Input
 =====
