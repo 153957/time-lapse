@@ -1,26 +1,11 @@
 import os
 
-import ffmpeg
-
-from time_lapse import output
+from time_lapse import make_movie
 
 NAME = os.path.basename(__file__).replace('.py', '')
-PATTERNS = [
-    '/Volumes/Falcon/tl_temp/180628_1/*.tiff',  # APL_027178 - APL_027581
-]
+PATTERN = '/Volumes/Falcon/tl_temp/180628_1/*.tiff',  # APL_027178 - APL_027581
 # poster: APL_027521
 
 
-def make_movie():
-    inputs = [
-        ffmpeg
-        .input(pattern, pattern_type='glob', framerate=25)
-        for pattern in PATTERNS
-    ]
-    input = ffmpeg.concat(*inputs)
-
-    output.create_outputs(input, NAME, verbose=True)
-
-
 if __name__ == '__main__':
-    make_movie()
+    make_movie(NAME, PATTERN, 25, 0, watermark=True, verbose=False, dryrun=False)

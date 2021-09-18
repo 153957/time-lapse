@@ -1,8 +1,6 @@
 import os
 
-import ffmpeg
-
-from time_lapse import output
+from time_lapse import make_movie
 
 NAME = os.path.basename(__file__).replace('.py', '')
 PATTERNS = [
@@ -11,16 +9,5 @@ PATTERNS = [
 ]
 
 
-def make_movie():
-    inputs = [
-        ffmpeg
-        .input(pattern, pattern_type='glob', framerate=48)
-        for pattern in PATTERNS
-    ]
-    input = ffmpeg.concat(*inputs)
-
-    output.create_outputs(input, NAME, verbose=True)
-
-
 if __name__ == '__main__':
-    make_movie()
+    make_movie(NAME, PATTERNS, 48, 0, watermark=True, verbose=False, dryrun=False)
