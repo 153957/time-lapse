@@ -11,27 +11,32 @@ OUTPUT_OPTIONS = {
 
 
 def create_outputs(
-    input,
+    source_input,
     name,
     framerate=None,
-    verbose=False,
-    dry_run=False,
     watermark=True,
-    text='Arne de Laat',
-    subtext='153957 Photography',
+    verbose=False,
+    dryrun=False,
 ):
     """Create output at multiple sizes (FHD and qHD)
 
-    :param input: ffmpeg input node ready for scaling and conversion.
+    :param source_input: ffmpeg input node ready for scaling and conversion.
     :param name: name of the output.
+    :param watermark: if True the default watermark will be added to the movie,
+        if a tuple is provided the contained strings are used for the main an sub lines.
     :param verbose: if True output the ffmpeg CLI command which will be used.
-    :param dry_run: if True the command will not be run.
-    :param watermark: if True a watermark will be added to the movie.
+    :param dryrun: if True the command will not be run.
 
     """
-    fhd_input = input.filter_('scale', size='hd1080', force_original_aspect_ratio='increase')
+
+    fhd_input = source_input.filter_('scale', size='hd1080', force_original_aspect_ratio='increase')
 
     if watermark:
+        if watermark is True:
+            text = 'Arne de Laat'
+            subtext = '153957 Photography'
+        else:
+            text, subtext = watermark
         watermarked_input = add_watermark(fhd_input, text, subtext, fontsize=32)
         split_input = watermarked_input.split()
     else:
@@ -44,7 +49,7 @@ def create_outputs(
 
     output = ffmpeg.merge_outputs(
         # 1920x1080 (1920x1280)
-        split_input[0].output(f'{name}_1920.mp4', **output_options),
+        split_input[0].output(f'{name}.mp4', **output_options),
         # 960x540 (960x640)
         (
             split_input[1]
@@ -55,9 +60,12 @@ def create_outputs(
 
     if verbose:
         print('ffmpeg ' + ' '.join(output.get_args()))
-        output.view(filename=f'{name}')  # Automatically suffixed with .pdf
+        try:
+            output.view(filename=f'{name}')  # Automatically suffixed with .pdf
+        except ImportError:
+            print('Install graphviz to generate the a signal graph')
 
-    if not dry_run:
+    if not dryrun:
         output.global_args('-hide_banner').run(overwrite_output=True)
 
     return output

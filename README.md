@@ -107,21 +107,13 @@ does it just scale/squish the video or crop?:
 Convert movie
 =============
 
-Using time-lapse and ffmpeg-python:
+Using time-lapse to find tif files, and create a movie called 'test_movie'
+with 24 fps and deflickered:
 
-    import ffmpeg
+    from time_lapse import output, source
 
-    from time_lapse import output
-
-    NAME = 'test'
-    PATTERN = '*.tiff'
-
-    input = (
-        ffmpeg
-        .input(PATTERN, pattern_type='glob', framerate=24)
-        .filter_('deflicker', mode='pm', size=10)
-    )
-    output.create_outputs(input, NAME, verbose=False)
+    source_input = source.get_input(['*.tif'], fps=24, deflicker=10)
+    output.create_outputs(source_input, 'test_movie', verbose=False)
 
 Inspection
 ----------
