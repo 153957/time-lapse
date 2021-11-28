@@ -12,9 +12,16 @@ def get_input(patterns, fps, deflicker):
     if isinstance(patterns, str):
         patterns = [patterns]
 
-    return ffmpeg.concat(*[
-        ffmpeg
-        .input(pattern, pattern_type='glob', framerate=fps)
-        .filter('deflicker', mode='pm', size=deflicker)
-        for pattern in patterns
-    ])
+    if deflicker:
+        return ffmpeg.concat(*[
+            ffmpeg
+            .input(pattern, pattern_type='glob', framerate=fps)
+            .filter('deflicker', mode='pm', size=deflicker)
+            for pattern in patterns
+        ])
+    else:
+        return ffmpeg.concat(*[
+            ffmpeg
+            .input(pattern, pattern_type='glob', framerate=fps)
+            for pattern in patterns
+        ])
