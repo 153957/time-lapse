@@ -1,13 +1,11 @@
-name: Run flake8 on Python code
+name: Run tests
 
 on:
   push:
 
 jobs:
   flake8:
-
     runs-on: ubuntu-latest
-
     steps:
       - uses: actions/checkout@v2
       - uses: actions/setup-python@v2
