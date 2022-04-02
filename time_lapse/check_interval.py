@@ -29,17 +29,21 @@ def find_outliers(pattern, shots_per_interval):
     ]
     outliers = []
 
+    n_since_last_change = 0
     previous_interval = datetime.timedelta()
 
     for i, (previous, current) in enumerate(zip(image_dates[:-1], image_dates[1:]), 1):
+        n_since_last_change += 1
         interval = current['date'] - previous['date']
         if previous_interval and abs(interval - previous_interval) > MARGIN:
             outliers.append((interval, previous['path'], current['path']))
             print(
-                f"{i:05} – "
+                f"{i:5} – "
+                f"{n_since_last_change:4} – "
                 f"{previous_interval.total_seconds():6}s → {interval.total_seconds():6}s – "
                 f"{previous['path']} → {current['path']}"
             )
+            n_since_last_change = 0
         previous_interval = interval
 
     return outliers
