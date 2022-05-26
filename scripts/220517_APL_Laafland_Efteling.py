@@ -1,6 +1,6 @@
 import os
 
-from time_lapse import make_movie, output, source
+from time_lapse import make_movie
 
 NAME = os.path.basename(__file__).replace('.py', '')
 PATTERN = '/Volumes/Jedi/Cache/220517_APL_1/*.tif'  # APL_112805 - APL_113025
