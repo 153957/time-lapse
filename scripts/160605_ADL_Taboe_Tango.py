@@ -1,7 +1,5 @@
 import os
 
-import ffmpeg
-
 from time_lapse import output, source
 
 NAME = os.path.basename(__file__).replace('.py', '')
