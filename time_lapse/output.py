@@ -63,7 +63,7 @@ def create_outputs(
         try:
             output.view(filename=f'{name}')  # Automatically suffixed with .pdf
         except ImportError:
-            print('Install graphviz to generate the a signal graph')
+            print('Install graphviz to generate a pdf of the signal graph')
 
     if not dryrun:
         output.global_args('-hide_banner').run(overwrite_output=True)
