@@ -101,7 +101,7 @@ def main():
     parser.add_argument(
         '--pattern',
         default='*.NEF',
-        help='Regex pattern with which to find the input frames.',
+        help='Glob pattern with which to find the input frames.',
     )
     parser.add_argument(
         '--shots_per_interval',
