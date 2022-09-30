@@ -29,7 +29,7 @@ def find_sequences(pattern, shots_per_interval):
         for path in files[::skip]
     ]
 
-    n_same_interval = 0
+    n_same_interval = 1
     start_of_sequence = image_dates[0]['path']
 
     print(
@@ -54,7 +54,9 @@ def find_sequences(pattern, shots_per_interval):
                     sep='\t'
                 )
             start_of_sequence = current['path']
-            n_same_interval = 0
+            n_same_interval = 1
+
+    n_same_interval += 1
 
     if n_same_interval > MIN_IMAGES_SEQUENCE:
         print(
