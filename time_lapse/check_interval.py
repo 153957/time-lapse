@@ -47,10 +47,11 @@ def find_sequences(pattern, shots_per_interval):
 
         if abs(interval - new_interval) > MARGIN:
             if n_same_interval > MIN_IMAGES_SEQUENCE:
+                end_of_sequence = current['path']
                 print(
                     f'{n_same_interval:4}',
                     f'{interval.total_seconds():7}s',
-                    f'{start_of_sequence} → {current["path"]}',
+                    f'{start_of_sequence} → {end_of_sequence}',
                     sep='\t'
                 )
             start_of_sequence = current['path']
@@ -59,10 +60,11 @@ def find_sequences(pattern, shots_per_interval):
     n_same_interval += 1
 
     if n_same_interval > MIN_IMAGES_SEQUENCE:
+        end_of_sequence = following['path']
         print(
             f'{n_same_interval:4}',
             f'{new_interval.total_seconds():7}s',
-            f'{start_of_sequence} → {following["path"]}',
+            f'{start_of_sequence} → {end_of_sequence}',
             sep='\t'
         )
 
