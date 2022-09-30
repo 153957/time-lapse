@@ -85,19 +85,19 @@ Filters
 
 Commonly used filters:
 
--   Deflicker <https://ffmpeg.org/ffmpeg-filters.html#toc-deflicker>
--   Scale <https://ffmpeg.org/ffmpeg-filters.html#scale>
--   Crop <https://ffmpeg.org/ffmpeg-filters.html#crop>
--   Drawtext <https://ffmpeg.org/ffmpeg-filters.html#drawtext-1>
--   Video sizes <https://ffmpeg.org/ffmpeg-utils.html#video-size-syntax>
+- Deflicker <https://ffmpeg.org/ffmpeg-filters.html#toc-deflicker>
+- Scale <https://ffmpeg.org/ffmpeg-filters.html#scale>
+- Crop <https://ffmpeg.org/ffmpeg-filters.html#crop>
+- Drawtext <https://ffmpeg.org/ffmpeg-filters.html#drawtext-1>
+- Video sizes <https://ffmpeg.org/ffmpeg-utils.html#video-size-syntax>
 
 Steps
 -----
 
--   First deflicker the video to ensure it is equally deflickered for
-    all outputs
--   Then scale and crop the videos to fit the desired final resolutions
--   Then add the watermark (which should not be deflickered)
+- First deflicker the video to ensure it is equally deflickered for
+  all outputs
+- Then scale and crop the videos to fit the desired final resolutions
+- Then add the watermark (which should not be deflickered)
 
 Scale video
 -----------
