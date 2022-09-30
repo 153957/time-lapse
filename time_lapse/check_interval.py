@@ -39,7 +39,7 @@ def find_sequences(pattern, shots_per_interval):
         sep='\t'
     )
 
-    for i, (previous, current, following) in enumerate(zip(image_dates[:-2], image_dates[1:-1], image_dates[2:]), 1):
+    for previous, current, following in zip(image_dates[:-2], image_dates[1:-1], image_dates[2:]):
         n_same_interval += 1
 
         interval = current['date'] - previous['date']
