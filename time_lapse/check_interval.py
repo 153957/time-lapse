@@ -3,11 +3,13 @@ import datetime
 import pathlib
 
 from glob import glob
+from operator import itemgetter
 
 import exifreader
 
 MARGIN = datetime.timedelta(seconds=0.2)
-MIN_IMAGES_SEQUENCE = 5
+MIN_INTERVAL = datetime.timedelta(seconds=0.4)
+MIN_IMAGES_SEQUENCE = 20
 
 
 def get_image_date(image_path):
@@ -21,18 +23,28 @@ def get_image_date(image_path):
     return image_date
 
 
-def find_sequences(pattern, shots_per_interval):
+def find_sequences(pattern, shots_per_interval, group):
     skip = shots_per_interval
     files = sorted(glob(pattern))
-    image_dates = [
-        {'path': pathlib.Path(path).name, 'date': get_image_date(path)}
-        for path in files[::skip]
-    ]
 
-    n_same_interval = 1
+    if not files:
+        print(f'Found no matching files the pattern "{pattern}"')
+        return
+
+    image_dates = sorted(
+        (
+            {'path': pathlib.Path(path), 'date': get_image_date(path)}
+            for path in files[::skip]
+        ),
+        key=itemgetter('date')
+    )
+
     start_of_sequence = image_dates[0]['path']
+    sequence = [start_of_sequence]
+    nth_sequence = 1
 
     print(
+        ' seq',
         '   n',
         'interval',
         'sequence',
@@ -40,33 +52,43 @@ def find_sequences(pattern, shots_per_interval):
     )
 
     for previous, current, following in zip(image_dates[:-2], image_dates[1:-1], image_dates[2:]):
-        n_same_interval += 1
+        sequence.append(current['path'])
 
         interval = current['date'] - previous['date']
         new_interval = following['date'] - current['date']
 
-        if abs(interval - new_interval) > MARGIN:
-            if n_same_interval > MIN_IMAGES_SEQUENCE:
-                end_of_sequence = current['path']
+        if interval < MIN_INTERVAL or abs(interval - new_interval) > MARGIN:
+            if len(sequence) > MIN_IMAGES_SEQUENCE:
                 print(
-                    f'{n_same_interval:4}',
+                    f'{nth_sequence:4}',
+                    f'{len(sequence):4}',
                     f'{interval.total_seconds():7}s',
-                    f'{start_of_sequence} → {end_of_sequence}',
+                    f'{sequence[0]} → {sequence[-1]}',
                     sep='\t'
                 )
-            start_of_sequence = current['path']
-            n_same_interval = 1
+                if group:
+                    group_sequence(sequence, nth_sequence)
+                nth_sequence += 1
+            sequence = [current['path']]
 
-    n_same_interval += 1
-
-    if n_same_interval > MIN_IMAGES_SEQUENCE:
-        end_of_sequence = following['path']
+    sequence.append(following['path'])
+    if len(sequence) > MIN_IMAGES_SEQUENCE:
         print(
-            f'{n_same_interval:4}',
+            f'{len(sequence):4}',
             f'{new_interval.total_seconds():7}s',
-            f'{start_of_sequence} → {end_of_sequence}',
+            f'{sequence[0]} → {sequence[-1]}',
             sep='\t'
         )
+        if group:
+            group_sequence(sequence, nth_sequence)
+
+
+def group_sequence(sequence, sequence_number):
+    """Group all files in the sequence into a subdirectory in the working directory"""
+
+    pathlib.Path(f'sequence_{sequence_number}').mkdir()
+    for path in sequence:
+        path.rename(f'sequence_{sequence_number}/{path.name}')
 
 
 def main():
@@ -82,11 +104,17 @@ def main():
         default=1,
         help='Number of images per interval, e.g. in case of HDR shots.',
     )
+    parser.add_argument(
+        '--group',
+        action='store_true',
+        help='Group images in the same interval into directories.',
+    )
     args = parser.parse_args()
 
     find_sequences(
         args.pattern,
         args.shots_per_interval,
+        args.group,
     )
 
 
