@@ -2,7 +2,7 @@ Time-Lapse assembling
 =====================
 
 [![PyPI](https://img.shields.io/pypi/v/time-lapse)](https://pypi.org/project/time-lapse/)
-[![License](https://img.shields.io/github/license/153957/time-lapse)](https://github.com/153957/time-lapse/blob/master/LICENSE)
+[![License](https://img.shields.io/github/license/153957/time-lapse)](https://github.com/153957/time-lapse/blob/main/LICENSE)
 [![Build](https://img.shields.io/github/actions/workflow/status/153957/time-lapse/tests.yml?branch=main)](https://github.com/153957/time-lapse/actions)
 
 This repo contains tools used to compile Time-lapse movies using
