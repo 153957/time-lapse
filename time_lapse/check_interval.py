@@ -12,7 +12,7 @@ MIN_INTERVAL = datetime.timedelta(seconds=0.4)
 MIN_IMAGES_SEQUENCE = 20
 
 
-def get_image_date(image_path):
+def get_image_date(image_path: str) -> datetime.datetime:
     """Get EXIF image date from an image as a datetime"""
     with open(image_path, 'rb') as _file:
         tags = exifreader.process_file(_file, details=False)
@@ -23,7 +23,7 @@ def get_image_date(image_path):
     return image_date
 
 
-def find_sequences(pattern, shots_per_interval, group):
+def find_sequences(pattern: str, shots_per_interval: int, group: bool) -> None:
     skip = shots_per_interval
     files = sorted(glob(pattern))
 
@@ -83,7 +83,7 @@ def find_sequences(pattern, shots_per_interval, group):
             group_sequence(sequence, nth_sequence)
 
 
-def group_sequence(sequence, sequence_number):
+def group_sequence(sequence: list[pathlib.Path], sequence_number: int) -> None:
     """Group all files in the sequence into a subdirectory in the working directory"""
 
     pathlib.Path(f'sequence_{sequence_number}').mkdir()
@@ -91,7 +91,7 @@ def group_sequence(sequence, sequence_number):
         path.rename(f'sequence_{sequence_number}/{path.name}')
 
 
-def main():
+def main() -> None:
     parser = argparse.ArgumentParser(description='.')
     parser.add_argument(
         '--pattern',

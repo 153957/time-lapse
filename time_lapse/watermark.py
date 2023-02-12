@@ -1,5 +1,7 @@
 import os
 
+import ffmpeg
+
 JOST_FONT = os.path.join(os.path.dirname(__file__), 'fonts/Jost-400-Book.ttf')
 FONT_OPTIONS = {
     'fontfile': JOST_FONT,
@@ -9,7 +11,7 @@ FONT_OPTIONS = {
 }
 
 
-def add_watermark(input, text, subtext, fontsize=32):
+def add_watermark(input: ffmpeg.FilterNode, text: str, subtext: str, fontsize: int=32) -> ffmpeg.FilterNode:
     watermarked_input = (
         input
         .drawtext(text=text, fontsize=fontsize, y='main_h-3*line_h', **FONT_OPTIONS)

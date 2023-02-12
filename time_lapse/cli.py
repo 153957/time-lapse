@@ -3,12 +3,20 @@ import argparse
 from time_lapse import output, source
 
 
-def make_movie(name, patterns, fps, deflicker, watermark, verbose, dryrun):
+def make_movie(
+    name: str,
+    patterns: list[str],
+    fps: int,
+    deflicker: int,
+    watermark: list[str],
+    verbose: bool,
+    dryrun: bool,
+) -> None:
     source_input = source.get_input(patterns, fps, deflicker)
     output.create_outputs(source_input, name, watermark=watermark, verbose=verbose, dryrun=dryrun)
 
 
-def main():
+def main() -> None:
     parser = argparse.ArgumentParser(description='Combine frames into a movie.')
     parser.add_argument(
         '--name',

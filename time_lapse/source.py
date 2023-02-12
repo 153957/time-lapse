@@ -1,7 +1,7 @@
 import ffmpeg
 
 
-def get_input(patterns, fps, deflicker):
+def get_input(patterns: list[str] | str, fps: int, deflicker: int) -> ffmpeg.FilterNode:
     """Find input files and set framerate and deflickering
 
     :param patterns: glob pattern(s) to find input frames.

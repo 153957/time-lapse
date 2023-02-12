@@ -10,6 +10,10 @@ test: flaketest checksetup unittests
 flaketest:
 	flake8
 
+.PHONY: typingtest
+typingtest:
+	mypy .
+
 .PHONY: checksetup
 checksetup:
 	python setup.py check -ms

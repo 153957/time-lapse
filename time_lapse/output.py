@@ -2,22 +2,22 @@ import ffmpeg
 
 from .watermark import add_watermark
 
-OUTPUT_OPTIONS = {
+OUTPUT_OPTIONS: dict[str, str | int] = {
     'crf': 20,
     'preset': 'slower',
     'movflags': 'faststart',
-    'pix_fmt': 'yuv420p'
+    'pix_fmt': 'yuv420p',
 }
 
 
 def create_outputs(
-    source_input,
-    name,
-    framerate=None,
-    watermark=True,
-    verbose=False,
-    dryrun=False,
-):
+    source_input: ffmpeg.FilterNode,
+    name: str,
+    framerate: int |  None=None,
+    watermark: bool | list[str]=True,
+    verbose: bool=False,
+    dryrun: bool=False,
+) -> ffmpeg.OutputNode:
     """Create output at multiple sizes (FHD and qHD)
 
     :param source_input: ffmpeg input node ready for scaling and conversion.
@@ -42,10 +42,11 @@ def create_outputs(
     else:
         split_input = fhd_input.split()
 
+    output_options: dict[str, str | int]
     if framerate:
         output_options = {'r': framerate, **OUTPUT_OPTIONS}
     else:
-        output_options = OUTPUT_OPTIONS
+        output_options = {**OUTPUT_OPTIONS}
 
     output = ffmpeg.merge_outputs(
         # 1920x1080 (1920x1280)
