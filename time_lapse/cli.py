@@ -3,8 +3,8 @@ import argparse
 from time_lapse import output, source
 
 
-def make_movie(name, patterns, fps, deflicker, watermark, verbose, dryrun):
-    source_input = source.get_input(patterns, fps, deflicker)
+def make_movie(name, patterns, fps, deflicker, watermark, verbose, dryrun, filters=None):
+    source_input = source.get_input(patterns, fps, deflicker, filters)
     output.create_outputs(source_input, name, watermark=watermark, verbose=verbose, dryrun=dryrun)
 
 
