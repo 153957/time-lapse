@@ -11,8 +11,9 @@ def make_movie(
     watermark: list[str],
     verbose: bool,
     dryrun: bool,
+    filters: list[tuple] | None,
 ) -> None:
-    source_input = source.get_input(patterns, fps, deflicker)
+    source_input = source.get_input(patterns, fps, deflicker, filters)
     output.create_outputs(source_input, name, watermark=watermark, verbose=verbose, dryrun=dryrun)
 
 
@@ -28,6 +29,7 @@ def main() -> None:
         help='Glob pattern(s) with which to find the input frames.',
         default='*.tiff',
         nargs='+',
+        dest='patterns',
     )
     parser.add_argument(
         '--fps',
@@ -51,15 +53,16 @@ def main() -> None:
         '--quiet',
         help='Produce less output, i.e. no graph and ffmpeg command.',
         action='store_false',
+        dest='verbose',
     )
     parser.add_argument(
         '--watermark',
         help='Add watermark, provide two value, one main text and the subtext.',
         nargs=2,
     )
-    args = parser.parse_args()
+    kwargs = vars(parser.parse_args())
 
-    make_movie(args.name, args.pattern, args.fps, args.deflicker, args.watermark, args.quiet, args.dryrun)
+    make_movie(**kwargs)
 
 
 if __name__ == '__main__':
