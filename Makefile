@@ -23,8 +23,8 @@ mypytest:
 checksetup:
 	python setup.py check -ms
 
-.PHONY: unittests
-unittests:
+.PHONY: unittest
+unittest:
 	python -m unittest discover --catch --start-directory tests --top-level-directory .
 
 .PHONY: clean
