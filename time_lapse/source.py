@@ -5,7 +5,7 @@ def get_input(
     patterns: list[str] | str,
     fps: int,
     deflicker: int,
-    filters: list[tuple] | None,
+    filters: list[tuple[str, dict[str, str]]] | None,
 ) -> ffmpeg.FilterNode:
     """Find input files and set framerate and deflickering
 

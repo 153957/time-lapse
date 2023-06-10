@@ -2,8 +2,9 @@ import argparse
 import datetime
 import pathlib
 
+from dataclasses import dataclass
 from glob import glob
-from operator import itemgetter
+from operator import attrgetter
 
 import exifreader
 
@@ -23,6 +24,12 @@ def get_image_date(image_path: str) -> datetime.datetime:
     return image_date
 
 
+@dataclass
+class ImageInfo:
+    path: pathlib.Path
+    date: datetime.datetime
+
+
 def find_sequences(pattern: str, shots_per_interval: int, group: bool) -> None:
     skip = shots_per_interval
     files = sorted(glob(pattern))
@@ -33,13 +40,13 @@ def find_sequences(pattern: str, shots_per_interval: int, group: bool) -> None:
 
     image_dates = sorted(
         (
-            {'path': pathlib.Path(path), 'date': get_image_date(path)}
+            ImageInfo(path=pathlib.Path(path), date=get_image_date(path))
             for path in files[::skip]
         ),
-        key=itemgetter('date')
+        key=attrgetter('date')
     )
 
-    start_of_sequence = image_dates[0]['path']
+    start_of_sequence = image_dates[0].path
     sequence = [start_of_sequence]
     nth_sequence = 1
 
@@ -48,14 +55,14 @@ def find_sequences(pattern: str, shots_per_interval: int, group: bool) -> None:
         '   n',
         'interval',
         'sequence',
-        sep='\t'
+        sep='\t',
     )
 
     for previous, current, following in zip(image_dates[:-2], image_dates[1:-1], image_dates[2:]):
-        sequence.append(current['path'])
+        sequence.append(current.path)
 
-        interval = current['date'] - previous['date']
-        new_interval = following['date'] - current['date']
+        interval = current.date - previous.date
+        new_interval = following.date - current.date
 
         if interval < MIN_INTERVAL or abs(interval - new_interval) > MARGIN:
             if len(sequence) > MIN_IMAGES_SEQUENCE:
@@ -64,20 +71,20 @@ def find_sequences(pattern: str, shots_per_interval: int, group: bool) -> None:
                     f'{len(sequence):4}',
                     f'{interval.total_seconds():7}s',
                     f'{sequence[0]} → {sequence[-1]}',
-                    sep='\t'
+                    sep='\t',
                 )
                 if group:
                     group_sequence(sequence, nth_sequence)
                 nth_sequence += 1
-            sequence = [current['path']]
+            sequence = [current.path]
 
-    sequence.append(following['path'])
+    sequence.append(following.path)
     if len(sequence) > MIN_IMAGES_SEQUENCE:
         print(
             f'{len(sequence):4}',
             f'{new_interval.total_seconds():7}s',
             f'{sequence[0]} → {sequence[-1]}',
-            sep='\t'
+            sep='\t',
         )
         if group:
             group_sequence(sequence, nth_sequence)
