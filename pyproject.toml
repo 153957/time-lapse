@@ -65,8 +65,8 @@ line-length = 120
 skip-string-normalization = true
 
 [tool.ruff]
-line-length = 120
 target-version = 'py311'
+line-length = 120
 select = [
     # https://github.com/charliermarsh/ruff#supported-rules
     'ALL',
