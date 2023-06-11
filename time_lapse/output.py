@@ -13,10 +13,10 @@ OUTPUT_OPTIONS: dict[str, str | int] = {
 def create_outputs(
     source_input: ffmpeg.FilterNode,
     name: str,
-    framerate: int |  None=None,
-    watermark: bool | list[str]=True,
-    verbose: bool=False,
-    dryrun: bool=False,
+    framerate: int | None = None,
+    watermark: bool | list[str] = True,
+    verbose: bool = False,
+    dryrun: bool = False,
 ) -> ffmpeg.OutputNode:
     """Create output at multiple sizes (FHD and qHD)
 
@@ -56,7 +56,7 @@ def create_outputs(
             split_input[1]
             .filter_('scale', size='qhd', force_original_aspect_ratio='increase')
             .output(f'{name}_960.mp4', **output_options)
-        )
+        ),
     )
 
     if verbose:

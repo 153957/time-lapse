@@ -39,11 +39,8 @@ def find_sequences(pattern: str, shots_per_interval: int, group: bool) -> None:
         return
 
     image_dates = sorted(
-        (
-            ImageInfo(path=pathlib.Path(path), date=get_image_date(path))
-            for path in files[::skip]
-        ),
-        key=attrgetter('date')
+        (ImageInfo(path=pathlib.Path(path), date=get_image_date(path)) for path in files[::skip]),
+        key=attrgetter('date'),
     )
 
     start_of_sequence = image_dates[0].path

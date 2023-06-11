@@ -11,10 +11,8 @@ FONT_OPTIONS = {
 }
 
 
-def add_watermark(input: ffmpeg.FilterNode, text: str, subtext: str, fontsize: int=32) -> ffmpeg.FilterNode:
-    watermarked_input = (
-        input
-        .drawtext(text=text, fontsize=fontsize, y='main_h-3*line_h', **FONT_OPTIONS)
-        .drawtext(text=subtext, fontsize=int(fontsize * 0.625), y='main_h-2*line_h', **FONT_OPTIONS)
+def add_watermark(input: ffmpeg.FilterNode, text: str, subtext: str, fontsize: int = 32) -> ffmpeg.FilterNode:
+    watermarked_input = input.drawtext(text=text, fontsize=fontsize, y='main_h-3*line_h', **FONT_OPTIONS).drawtext(
+        text=subtext, fontsize=int(fontsize * 0.625), y='main_h-2*line_h', **FONT_OPTIONS
     )
     return watermarked_input
