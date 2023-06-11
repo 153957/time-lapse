@@ -79,6 +79,17 @@ select = [
     'E261', 'E262', 'E265', 'E266',
     'E271', 'E272', 'E273', 'E274', 'E275',
 ]
+ignore = [
+    'D',  # Ignore docstring checks
+    'FBT001',  # Allow positional for boolean arguments
+    'FBT002',  # Allow default value for boolean arguments
+    'PD',  # Not using pandas
+    'PLR0913',  # Allow functions with many arguments
+    'Q000',  # Use single quotes
+    'RET504',  # Allow variable assignment before return
+    'SIM108',  # Allow if-else block instead of ternary
+    'T201',  # Allow using print
+]
 
 [tool.ruff.isort]
 lines-between-types = 1
