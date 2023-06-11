@@ -11,13 +11,13 @@ OUTPUT_OPTIONS: dict[str, str | int] = {
 
 
 def create_outputs(
-    source_input: ffmpeg.FilterNode,
+    source_input: ffmpeg.nodes.FilterNode,
     name: str,
     framerate: int | None = None,
     watermark: bool | list[str] = True,
     verbose: bool = False,
     dryrun: bool = False,
-) -> ffmpeg.OutputNode:
+) -> ffmpeg.nodes.OutputNode:
     """Create output at multiple sizes (FHD and qHD)
 
     :param source_input: ffmpeg input node ready for scaling and conversion.
