@@ -1,7 +1,12 @@
 import ffmpeg
 
 
-def get_input(patterns, fps, deflicker, filters=None):
+def get_input(
+    patterns: list[str] | str,
+    fps: int,
+    deflicker: int,
+    filters: list[tuple[str, dict[str, str]]] | None,
+) -> ffmpeg.nodes.FilterNode:
     """Find input files and set framerate and deflickering
 
     :param patterns: glob pattern(s) to find input frames.
@@ -14,25 +19,15 @@ def get_input(patterns, fps, deflicker, filters=None):
     if isinstance(patterns, str):
         patterns = [patterns]
 
-    pattern_inputs = [
-        ffmpeg
-        .input(pattern, pattern_type='glob', framerate=fps)
-        for pattern in patterns
-    ]
+    pattern_inputs = [ffmpeg.input(pattern, pattern_type='glob', framerate=fps) for pattern in patterns]
 
     if filters:
         for filter_name, filter_arguments in filters:
-            pattern_inputs = [
-                pattern_input
-                .filter(filter_name, **filter_arguments)
-                for pattern_input in pattern_inputs
-            ]
+            pattern_inputs = [pattern_input.filter(filter_name, **filter_arguments) for pattern_input in pattern_inputs]
 
     if deflicker:
         pattern_inputs = [
-            pattern_input
-            .filter('deflicker', mode='pm', size=deflicker)
-            for pattern_input in pattern_inputs
+            pattern_input.filter('deflicker', mode='pm', size=deflicker) for pattern_input in pattern_inputs
         ]
 
     return ffmpeg.concat(*pattern_inputs)

@@ -4,7 +4,7 @@ on:
   push:
 
 jobs:
-  flake8:
+  rufftest:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
@@ -12,6 +12,32 @@ jobs:
         with:
           python-version: '3.11'
           cache: 'pip'
-          cache-dependency-path: 'setup.cfg'
+          cache-dependency-path: 'requirements-ruff.txt'
+      - run: make ruffinstall
+      - run: make rufftest
+        env:
+          RUFF_FORMAT: github
+
+  mypytest:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-python@v4
+        with:
+          python-version: '3.11'
+          cache: 'pip'
+          cache-dependency-path: 'pyproject.toml'
       - run: make devinstall
-      - run: make flaketest
+      - run: make mypytest
+
+  unittest:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-python@v4
+        with:
+          python-version: '3.11'
+          cache: 'pip'
+          cache-dependency-path: 'pyproject.toml'
+      - run: make devinstall
+      - run: make unittest

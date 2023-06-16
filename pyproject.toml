@@ -1,0 +1,113 @@
+[build-system]
+requires = ['flit_core>=3.9']
+build-backend = 'flit_core.buildapi'
+
+[project]
+name = 'time-lapse'
+version = '3'
+description = 'Time-lapse movie assembly'
+readme = 'README.md'
+requires-python = '>=3.11'
+license = {file = 'LICENSE'}
+authors = [
+    {name = 'Arne de Laat', email = 'arne@delaat.net'},
+]
+maintainers = [
+    {name = 'Arne de Laat', email = 'arne@delaat.net'},
+]
+keywords = [
+    'ffmpeg',
+    'photography',
+    'time-lapse',
+]
+classifiers = [
+    'Intended Audience :: Developers',
+    'Intended Audience :: Other Audience',
+    'License :: OSI Approved :: MIT License',
+    'Programming Language :: Python',
+    'Programming Language :: Python :: 3',
+    'Topic :: Multimedia :: Video :: Conversion',
+]
+dependencies = [
+    'exifreader',
+    'ffmpeg-python',
+]
+
+[project.optional-dependencies]
+graph = [
+    'graphviz',
+]
+dev = [
+    'coverage',
+    'flit',
+    'mypy',
+]
+
+[project.urls]
+Homepage = 'https://arne.delaat.net/timelapse.html'
+Repository = 'https://github.com/153957/time-lapse'
+
+[project.scripts]
+timelapse = 'time_lapse.cli:main'
+check_interval = 'time_lapse.check_interval:main'
+
+[tool.mypy]
+ignore_missing_imports = true
+show_column_numbers = true
+show_error_codes = true
+strict = true
+warn_return_any = true
+warn_unused_configs = true
+
+[tool.black]
+target-version = ['py311']
+line-length = 120
+skip-string-normalization = true
+
+[tool.ruff]
+target-version = 'py311'
+line-length = 120
+select = [
+    # https://github.com/charliermarsh/ruff#supported-rules
+    'ALL',
+    'E111', 'E112', 'E113', 'E114', 'E115', 'E116', 'E117',
+    'E201', 'E202', 'E203',
+    'E211',
+    'E221', 'E222', 'E223', 'E224', 'E225', 'E226', 'E227', 'E228',
+    'E231',
+    'E251', 'E252',
+    'E261', 'E262', 'E265', 'E266',
+    'E271', 'E272', 'E273', 'E274', 'E275',
+]
+ignore = [
+    'D',  # Ignore docstring checks
+    'FBT001',  # Allow positional for boolean arguments
+    'FBT002',  # Allow default value for boolean arguments
+    'PD',  # Not using pandas
+    'PLR0913',  # Allow functions with many arguments
+    'Q000',  # Use single quotes
+    'RET504',  # Allow variable assignment before return
+    'SIM108',  # Allow if-else block instead of ternary
+    'T201',  # Allow using print
+]
+
+[tool.ruff.isort]
+lines-between-types = 1
+section-order = [
+    'future',
+    'standard-library',
+    'third-party',
+    'ffmpeg',
+    'first-party',
+    'local-folder',
+]
+
+[tool.ruff.isort.sections]
+ffmpeg = ['ffmpeg']
+
+[tool.coverage.run]
+branch = true
+source = [
+    'time_lapse',
+    'tests',
+]
