@@ -11,7 +11,7 @@ def make_movie(
     watermark: list[str],
     verbose: bool,
     dryrun: bool,
-    filters: list[tuple[str, dict[str, str]]] | None,
+    filters: list[tuple[str, dict[str, str]]] | None = None,
 ) -> None:
     source_input = source.get_input(patterns, fps, deflicker, filters)
     output.create_outputs(source_input, name, watermark=watermark, verbose=verbose, dryrun=dryrun)
