@@ -19,8 +19,8 @@ def get_image_date(image_path: str) -> datetime.datetime:
         tags = exifreader.process_file(_file, details=False)
     date_time = tags['EXIF DateTimeOriginal'].values
     subsec = tags['EXIF SubSecTimeOriginal'].values
-    full_date_time = f'{date_time}.{subsec}'
-    image_date = datetime.datetime.strptime(full_date_time, '%Y:%m:%d %H:%M:%S.%f')
+    full_date_time = f'{date_time}.{subsec}+0000'
+    image_date = datetime.datetime.strptime(full_date_time, '%Y:%m:%d %H:%M:%S.%f%z')
     return image_date
 
 
