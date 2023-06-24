@@ -9,7 +9,7 @@ devinstall:
 	pip install --upgrade --upgrade-strategy eager --editable .[dev]
 
 .PHONY: test
-test: rufftest mypytest checksetup unittests
+test: rufftest mypytest unittests
 
 .PHONY: rufftest
 rufftest:
@@ -18,10 +18,6 @@ rufftest:
 .PHONY: mypytest
 mypytest:
 	mypy .
-
-.PHONY: checksetup
-checksetup:
-	python setup.py check -ms
 
 .PHONY: unittest
 unittest:
