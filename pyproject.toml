@@ -38,9 +38,12 @@ graph = [
     'graphviz',
 ]
 dev = [
-    'coverage',
-    'flit',
-    'mypy',
+    'black==23.3.0',
+    'coverage==7.2.7',
+    'mypy==1.4.0',
+]
+publish = [
+    'flit==3.9.0',
 ]
 
 [project.urls]
@@ -80,15 +83,19 @@ select = [
     'E271', 'E272', 'E273', 'E274', 'E275',
 ]
 ignore = [
+    'ANN101',  # No need to add type to self
     'D',  # Ignore docstring checks
+    'EM',  # Allow messages directly in exceptions
     'FBT001',  # Allow positional for boolean arguments
     'FBT002',  # Allow default value for boolean arguments
     'PD',  # Not using pandas
     'PLR0913',  # Allow functions with many arguments
+    'PT',  # Not using pytest
     'Q000',  # Use single quotes
     'RET504',  # Allow variable assignment before return
     'SIM108',  # Allow if-else block instead of ternary
     'T201',  # Allow using print
+    'TRY003',  # Specific messages for common exception classes
 ]
 
 [tool.ruff.isort]
