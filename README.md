@@ -119,7 +119,7 @@ with 24 fps and deflickered:
 
     from time_lapse import output, source
 
-    source_input = source.get_input(['*.tif'], fps=24, deflicker=10)
+    source_input = source.get_input(['*.tif'], fps=24, deflicker=10, filters=None)
     output.create_outputs(source_input, 'test_movie', verbose=False)
 
 Inspection

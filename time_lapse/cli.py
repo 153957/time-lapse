@@ -5,10 +5,10 @@ from time_lapse import output, source
 
 def make_movie(
     name: str,
-    patterns: list[str],
+    patterns: list[str] | str,
     fps: int,
     deflicker: int,
-    watermark: list[str],
+    watermark: bool | list[str],
     verbose: bool,
     dryrun: bool,
     filters: list[tuple[str, dict[str, str]]] | None = None,
