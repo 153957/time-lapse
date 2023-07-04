@@ -18,7 +18,7 @@ jobs:
         env:
           RUFF_FORMAT: github
 
-  mypytest:
+  typingtest:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
@@ -28,7 +28,7 @@ jobs:
           cache: 'pip'
           cache-dependency-path: 'pyproject.toml'
       - run: make devinstall
-      - run: make mypytest
+      - run: make typingtest
 
   unittest:
     runs-on: ubuntu-latest
