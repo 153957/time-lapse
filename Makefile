@@ -27,14 +27,9 @@ unittest:
 clean:
 	rm -rf build dist
 
-.PHONY: build
-build: test clean
-	python -m build --sdist --wheel
-	twine check dist/*
-
-.PHONY: release
-release: build
-	twine upload dist/*
+.PHONY: publish
+publish:
+	flit publish
 
 .PHONY: demo
 demo:
