@@ -38,7 +38,7 @@ graph = [
     'graphviz',
 ]
 dev = [
-    'black==23.3.0',
+    'black==23.7.0',
     'coverage==7.2.7',
     'mypy==1.4.1',
 ]
