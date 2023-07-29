@@ -73,17 +73,11 @@ line-length = 120
 select = [
     # https://github.com/charliermarsh/ruff#supported-rules
     'ALL',
-    'E111', 'E112', 'E113', 'E114', 'E115', 'E116', 'E117',
-    'E201', 'E202', 'E203',
-    'E211',
-    'E221', 'E222', 'E223', 'E224', 'E225', 'E226', 'E227', 'E228',
-    'E231',
-    'E251', 'E252',
-    'E261', 'E262', 'E265', 'E266',
-    'E271', 'E272', 'E273', 'E274', 'E275',
+    'NURSERY',
 ]
 ignore = [
     'ANN101',  # No need to add type to self
+    'CPY001',  # Do not require copyright notices
     'D',  # Ignore docstring checks
     'EM',  # Allow messages directly in exceptions
     'FBT001',  # Allow positional for boolean arguments
