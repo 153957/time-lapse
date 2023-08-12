@@ -12,9 +12,9 @@ MIN_INTERVAL = datetime.timedelta(seconds=0.4)
 MIN_IMAGES_SEQUENCE = 20
 
 
-def get_image_date(image_path: str) -> datetime.datetime:
+def get_image_date(image_path: pathlib.Path) -> datetime.datetime:
     """Get EXIF image date from an image as a datetime"""
-    with pathlib.Path(image_path).open('rb') as _file:
+    with image_path.open('rb') as _file:
         tags = exifreader.process_file(_file, details=False)
     date_time = tags['EXIF DateTimeOriginal'].values
     subsec = tags['EXIF SubSecTimeOriginal'].values
@@ -38,7 +38,7 @@ def find_sequences(pattern: str, shots_per_interval: int, group: bool) -> None:
         return
 
     image_dates = sorted(
-        (ImageInfo(path=pathlib.Path(path), date=get_image_date(path)) for path in files[::skip]),
+        (ImageInfo(path=path, date=get_image_date(path)) for path in files[::skip]),
         key=attrgetter('date'),
     )
 
