@@ -3,7 +3,6 @@ import datetime
 import pathlib
 
 from dataclasses import dataclass
-from glob import glob
 from operator import attrgetter
 
 import exifreader
@@ -32,7 +31,7 @@ class ImageInfo:
 
 def find_sequences(pattern: str, shots_per_interval: int, group: bool) -> None:
     skip = shots_per_interval
-    files = sorted(glob(pattern))
+    files = sorted(pathlib.Path().glob(pattern))
 
     if not files:
         print(f'Found no matching files the pattern "{pattern}"')
