@@ -10,7 +10,7 @@ def create_thumbnail(
     width: int = 180,
     height: int = 120,
 ) -> None:
-    target_path = pathlib.Path() / f'{name}.png'
+    target_path = pathlib.Path() / f'{name}{poster_path.suffix}'
     thumbnail_path = target_path.parent / f'{name}@2x.png'
     with Image.open(poster_path) as image:
         image.resize(
