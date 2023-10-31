@@ -77,6 +77,7 @@ def find_sequences(pattern: str, shots_per_interval: int, group: bool) -> None:
     sequence.append(following.path)
     if len(sequence) > MIN_IMAGES_SEQUENCE:
         print(
+            f'{nth_sequence:4}',
             f'{len(sequence):4}',
             f'{new_interval.total_seconds():7}s',
             f'{sequence[0]} → {sequence[-1]}',
