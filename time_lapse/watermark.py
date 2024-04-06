@@ -7,7 +7,8 @@ FONT_OPTIONS = {
     'fontfile': JOST_FONT,
     'fontcolor': 'white',
     'shadowcolor': 'black',
-    'x': 'main_w-text_w-line_h',
+    'x': 'main_w - text_w - text_h',
+    'y_align': 'baseline',
 }
 
 
@@ -20,12 +21,12 @@ def add_watermark(
     watermarked_input = input_node.drawtext(
         text=text,
         fontsize=fontsize,
-        y='main_h-3*line_h',
+        y='main_h - (text_h * 2)',
         **FONT_OPTIONS,
     ).drawtext(
         text=subtext,
         fontsize=int(fontsize * 0.625),
-        y='main_h-2*line_h',
+        y='main_h - text_h',
         **FONT_OPTIONS,
     )
     return watermarked_input
