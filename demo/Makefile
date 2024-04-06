@@ -1,3 +1,3 @@
 .PHONY: demo
 demo:
-	timelapse --name S60_050504 --pattern "./source/*.jpg" --fps 25 --deflicker 7 --quiet
+	timelapse --name S60_050504 --pattern "./source/*.jpg" --fps 25 --deflicker 7 --quiet --watermark "Arne de Laat" "153957 Photography"
