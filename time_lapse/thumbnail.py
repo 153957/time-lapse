@@ -15,7 +15,7 @@ def create_thumbnail(
     with Image.open(poster_path) as image:
         image.resize(
             size=(width, height),
-            resample=Image.LANCZOS,
+            resample=Image.Resampling.LANCZOS,
         ).save(
             thumbnail_path,
             compress=False,
