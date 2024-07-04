@@ -39,7 +39,7 @@ graph = [
     'graphviz',
 ]
 dev = [
-    'coverage==7.5.0',
+    'coverage==7.5.4',
     'mypy==1.10.1',
 ]
 publish = [
