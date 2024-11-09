@@ -29,7 +29,6 @@ classifiers = [
     'Topic :: Multimedia :: Video :: Conversion',
 ]
 dependencies = [
-    'exifreader==0.1.1',
     'ffmpeg-python==0.2.0',
     'pillow==11.0.0',
 ]
@@ -52,7 +51,6 @@ Repository = 'https://github.com/153957/time-lapse'
 
 [project.scripts]
 timelapse = 'time_lapse.cli:main'
-check_interval = 'time_lapse.check_interval:main'
 
 [tool.mypy]
 ignore_missing_imports = true
