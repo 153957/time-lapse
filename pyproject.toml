@@ -7,7 +7,7 @@ name = 'time-lapse'
 version = '7.0'
 description = 'Time-lapse movie assembly'
 readme = 'README.md'
-requires-python = '>=3.11'
+requires-python = '>=3.13'
 license = {file = 'LICENSE'}
 authors = [
     {name = 'Arne de Laat', email = 'arne@delaat.net'},
