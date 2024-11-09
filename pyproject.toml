@@ -4,7 +4,7 @@ build-backend = 'flit_core.buildapi'
 
 [project]
 name = 'time-lapse'
-version = '7.0'
+version = '8.0'
 description = 'Time-lapse movie assembly'
 readme = 'README.md'
 requires-python = '>=3.13'
