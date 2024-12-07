@@ -29,7 +29,7 @@ def create_outputs(
 
     """
 
-    fhd_input = source_input.filter_('scale', size='hd1080', force_original_aspect_ratio='increase')
+    fhd_input = source_input.filter_('scale', size='1920x1920', force_original_aspect_ratio='decrease')
 
     if watermark:
         if watermark is True:
@@ -49,12 +49,12 @@ def create_outputs(
         output_options = {**OUTPUT_OPTIONS}
 
     output = ffmpeg.merge_outputs(
-        # 1920x1080 (1920x1280)
+        # Fit into 1920x1920 (For 3:2 video: 1920x1280)
         split_input[0].output(f'{name}.mp4', **output_options),
-        # 960x540 (960x640)
+        # Fit into 960x960 (For 3:2 video: 960x640)
         (
             split_input[1]
-            .filter_('scale', size='qhd', force_original_aspect_ratio='increase')
+            .filter_('scale', size='960x960', force_original_aspect_ratio='decrease')
             .output(f'{name}_960.mp4', **output_options)
         ),
     )
