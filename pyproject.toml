@@ -39,7 +39,7 @@ graph = [
 ]
 dev = [
     'coverage==7.6.9',
-    'mypy==1.13.0',
+    'mypy==1.14.0',
 ]
 publish = [
     'flit==3.10.1',
