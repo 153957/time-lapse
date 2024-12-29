@@ -50,7 +50,8 @@ Homepage = 'https://arne.delaat.net/timelapse.html'
 Repository = 'https://github.com/153957/time-lapse'
 
 [project.scripts]
-timelapse = 'time_lapse.cli:main'
+timelapse = 'time_lapse.cli:timelapse'
+detect_audio = 'time_lapse.cli:detect_audio'
 
 [tool.mypy]
 ignore_missing_imports = true

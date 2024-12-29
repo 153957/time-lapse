@@ -6,6 +6,8 @@ import ffmpeg
 
 def files_with_audio(pattern: str = '*.mp4') -> Iterator[str]:
     for filename in Path().glob(pattern):
-        for stream in ffmpeg.probe(filename)['streams']:
-            if stream['codec_type'] == 'audio':
-                yield str(filename)
+        if any(
+            stream['codec_type'] == 'audio'
+            for stream in ffmpeg.probe(filename)['streams']
+        ):
+            yield str(filename)

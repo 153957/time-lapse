@@ -1,6 +1,7 @@
 import argparse
 
 from time_lapse import output, source
+from time_lapse.detect_audio import files_with_audio
 
 
 def make_movie(
@@ -17,7 +18,7 @@ def make_movie(
     output.create_outputs(source_input, name, watermark=watermark, verbose=verbose, dryrun=dryrun)
 
 
-def main() -> None:
+def get_parser_timelapse() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(description='Combine frames into a movie.')
     parser.add_argument(
         '--name',
@@ -60,10 +61,29 @@ def main() -> None:
         help='Add watermark, provide two value, one main text and the subtext.',
         nargs=2,
     )
+    return parser
+
+
+def timelapse() -> None:
+    parser = get_parser_timelapse()
     kwargs = vars(parser.parse_args())
 
     make_movie(**kwargs)
 
 
-if __name__ == '__main__':
-    main()
+def get_parser_detect_audio() -> argparse.ArgumentParser:
+    parser = argparse.ArgumentParser(description='Find movie files with audio streams.')
+    parser.add_argument(
+        '--pattern',
+        help='Glob pattern with which to find the movies to check.',
+        default='*.mp4',
+    )
+    return parser
+
+
+def detect_audio() -> None:
+    parser = get_parser_detect_audio()
+    kwargs = vars(parser.parse_args())
+
+    for filename in files_with_audio(**kwargs):
+        print(filename)
