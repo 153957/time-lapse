@@ -71,9 +71,10 @@ quote-style = 'single'  # Prefer single quotes, except for triple quotes strings
 [tool.ruff.lint]
 select = ['ALL']  # https://docs.astral.sh/ruff/rules/
 ignore = [
-    'ANN101',  # No need to add type to self
     'CPY001',  # Do not require copyright notices
-    'D',  # Ignore docstring checks
+    'D104',  # Allow missing package docstring
+    'D203',  # Should instead be no blank line before class docstring
+    'D213',  # Summary should instead be on the first line
     'EM',  # Allow messages directly in exceptions
     'FBT001',  # Allow positional for boolean arguments
     'FBT002',  # Allow default value for boolean arguments

@@ -1,3 +1,4 @@
+"""Function called by the CLI."""
 import argparse
 
 from time_lapse import output, source
@@ -14,11 +15,26 @@ def make_movie(
     dryrun: bool,
     filters: list[tuple[str, dict[str, str]]] | None = None,
 ) -> None:
+    """Detect which movie files have an audio stream steered via the CLI.
+
+    :param name: Output name of the movie, without file extension.
+    :param patterns: Glob pattern(s) with which to find the input frames.
+    :param fps: Frame rate of the created movie.
+    :param deflicker: Frame window to use for deflicker, off when set to 0..
+    :param watermark: Enable or disable watermark. For custom watermark provide two
+        values, one main text and the subtext.
+    :param verbose: When enabled the output is more verbose, showing the ffmpeg
+        command and the filter graph.
+    :param dryrun: When enabled the ffmpeg command is not actually executed.
+    :param filters: A list of additional filters to apply to the movie.
+
+    """
     source_input = source.get_input(patterns, fps, deflicker, filters)
     output.create_outputs(source_input, name, watermark=watermark, verbose=verbose, dryrun=dryrun)
 
 
 def get_parser_timelapse() -> argparse.ArgumentParser:
+    """Get argument parser for the timelapse cli."""
     parser = argparse.ArgumentParser(description='Combine frames into a movie.')
     parser.add_argument(
         '--name',
@@ -58,13 +74,14 @@ def get_parser_timelapse() -> argparse.ArgumentParser:
     )
     parser.add_argument(
         '--watermark',
-        help='Add watermark, provide two value, one main text and the subtext.',
+        help='Add watermark, provide two values, one main text and the subtext.',
         nargs=2,
     )
     return parser
 
 
 def timelapse() -> None:
+    """Create a movie steered via the CLI."""
     parser = get_parser_timelapse()
     kwargs = vars(parser.parse_args())
 
@@ -72,6 +89,7 @@ def timelapse() -> None:
 
 
 def get_parser_detect_audio() -> argparse.ArgumentParser:
+    """Get argument parser for the detect_audio cli."""
     parser = argparse.ArgumentParser(description='Find movie files with audio streams.')
     parser.add_argument(
         '--pattern',
@@ -82,6 +100,7 @@ def get_parser_detect_audio() -> argparse.ArgumentParser:
 
 
 def detect_audio() -> None:
+    """Detect which movie files have an audio stream steered via the CLI."""
     parser = get_parser_detect_audio()
     kwargs = vars(parser.parse_args())
 

@@ -1,3 +1,4 @@
+"""Function related to adding and configuring watermarks."""
 import pathlib
 
 import ffmpeg
@@ -18,6 +19,17 @@ def add_watermark(
     subtext: str,
     fontsize: int = 32,
 ) -> ffmpeg.nodes.FilterNode:
+    """Add a text-based watermark to the video.
+
+    Add text to the bottom right of the video,
+    using the Jost font in white with a black shadow.
+
+    :param input_node: An ffmpeg source node.
+    :param text: Main watermark text.
+    :param subtext: Second row of text with smaller font size.
+    :param fontsize: Font size of the main text, the subtext will be 5/8th the size.
+
+    """
     watermarked_input = input_node.drawtext(
         text=text,
         fontsize=fontsize,

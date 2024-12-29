@@ -1,3 +1,4 @@
+"""Functions related to creating the output."""
 import ffmpeg
 
 from .watermark import add_watermark
@@ -18,7 +19,7 @@ def create_outputs(
     verbose: bool = False,
     dryrun: bool = False,
 ) -> ffmpeg.nodes.OutputNode:
-    """Create output at multiple sizes (FHD and qHD)
+    """Create output at multiple sizes (FHD and qHD).
 
     :param source_input: ffmpeg input node ready for scaling and conversion.
     :param name: name of the output.
@@ -28,7 +29,6 @@ def create_outputs(
     :param dryrun: if True the command will not be run.
 
     """
-
     fhd_input = source_input.filter_('scale', size='1920x1920', force_original_aspect_ratio='decrease')
 
     if watermark:

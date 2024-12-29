@@ -1,3 +1,4 @@
+"""Function related to creating thumbnails."""
 import pathlib
 import shutil
 
@@ -10,6 +11,17 @@ def create_thumbnail(
     width: int = 180,
     height: int = 120,
 ) -> None:
+    """Create a thumbnail of the desired size for a given source image.
+
+    The image will be cropped if the target aspect ratio does not
+    match the aspect ratio of the source image.
+
+    :param name: Name of the output thumbnail file.
+    :param poster_path: Path to the source image.
+    :param width: Target pixel width of the thumbnail.
+    :param height: Target pixel height of the thumbnail.
+
+    """
     target_path = pathlib.Path() / f'{name}{poster_path.suffix}'
     thumbnail_path = target_path.parent / f'{name}@2x.png'
 
