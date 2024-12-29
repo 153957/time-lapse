@@ -1,4 +1,5 @@
 """Functions related to creating the output."""
+
 import ffmpeg
 
 from .watermark import add_watermark

@@ -1,4 +1,5 @@
 """Function related to adding and configuring watermarks."""
+
 import pathlib
 
 import ffmpeg

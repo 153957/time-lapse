@@ -1,4 +1,5 @@
 """Function related to creating thumbnails."""
+
 import pathlib
 import shutil
 

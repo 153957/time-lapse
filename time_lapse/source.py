@@ -1,4 +1,5 @@
 """Function related to finding the input."""
+
 import ffmpeg
 
 

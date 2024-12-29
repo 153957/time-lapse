@@ -1,4 +1,5 @@
 """Function called by the CLI."""
+
 import argparse
 
 from time_lapse import output, source
