@@ -22,7 +22,8 @@ typingtest:
 
 .PHONY: unittest
 unittest:
-	python -m unittest discover --catch --start-directory tests --top-level-directory .
+	coverage run -m unittest
+	coverage report
 
 .PHONY: clean
 clean:

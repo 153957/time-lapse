@@ -110,3 +110,8 @@ source = [
     'time_lapse',
     'tests',
 ]
+
+[tool.coverage.report]
+show_missing = true
+skip_empty = true
+skip_covered = true
