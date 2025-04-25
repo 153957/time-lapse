@@ -1,15 +1,22 @@
 version: 2
 updates:
-  - package-ecosystem: "github-actions"
-    directory: "/"
+  - package-ecosystem: 'github-actions'
+    directory: '/'
     schedule:
       interval: 'weekly'
-      day: 'thursday'
+      day: 'friday'
       time: '07:30'
 
-  - package-ecosystem: "pip"
-    directory: "/"
+  - package-ecosystem: 'pip'
+    directory: '/'
     schedule:
       interval: 'weekly'
-      day: 'thursday'
+      day: 'friday'
       time: '07:30'
+    groups:
+      all:
+        patterns:
+          - '*'
+        update-types:
+          - 'minor'
+          - 'patch'
