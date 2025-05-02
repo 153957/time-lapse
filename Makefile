@@ -1,12 +1,10 @@
 .PHONY: ruffinstall
 ruffinstall:
-	pip install --upgrade pip
-	pip install --upgrade --upgrade-strategy eager -r requirements-ruff.txt
+	uv pip install --upgrade -r requirements-ruff.txt
 
 .PHONY: devinstall
 devinstall:
-	pip install --upgrade pip
-	pip install --upgrade --upgrade-strategy eager --editable .[dev]
+	uv pip install --upgrade --editable .[dev]
 
 .PHONY: test
 test: rufftest typingtest unittests
