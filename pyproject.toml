@@ -30,7 +30,7 @@ classifiers = [
 ]
 dependencies = [
     'ffmpeg-python==0.2.0',
-    'pillow==11.2.1',
+    'pillow==11.3.0',
 ]
 
 [project.optional-dependencies]
