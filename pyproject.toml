@@ -38,8 +38,8 @@ graph = [
     'graphviz',
 ]
 dev = [
-    'coverage==7.9.2',
-    'mypy==1.17.0',
+    'coverage==7.10.1',
+    'mypy==1.17.1',
 ]
 publish = [
     'flit==3.12.0',
