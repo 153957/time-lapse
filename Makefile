@@ -16,7 +16,7 @@ rufftest:
 
 .PHONY: typingtest
 typingtest:
-	mypy .
+	ty check
 
 .PHONY: unittest
 unittest:
