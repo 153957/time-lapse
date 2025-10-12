@@ -1,6 +1,6 @@
 [build-system]
-requires = ['flit_core>=3.9']
-build-backend = 'flit_core.buildapi'
+requires = ["uv_build>=0.8.4"]
+build-backend = "uv_build"
 
 [project]
 name = 'time-lapse'
@@ -8,7 +8,8 @@ version = '9.0'
 description = 'Time-lapse movie assembly'
 readme = 'README.md'
 requires-python = '>=3.13'
-license = {file = 'LICENSE'}
+license = 'MIT'
+license-files = ['LICENSE']
 authors = [
     {name = 'Arne de Laat', email = 'arne@delaat.net'},
 ]
@@ -41,9 +42,6 @@ dev = [
     'coverage==7.9.2',
     'ty==0.0.1a22',
 ]
-publish = [
-    'flit==3.12.0',
-]
 
 [project.urls]
 Homepage = 'https://arne.delaat.net/timelapse.html'
@@ -52,6 +50,10 @@ Repository = 'https://github.com/153957/time-lapse'
 [project.scripts]
 timelapse = 'time_lapse.cli:timelapse'
 detect_audio = 'time_lapse.cli:detect_audio'
+
+[tool.uv.build-backend]
+module-name = 'time_lapse'
+module-root = ''
 
 [tool.ty.rules]
 unresolved-attribute = 'ignore'
