@@ -39,7 +39,7 @@ graph = [
     'graphviz',
 ]
 dev = [
-    'coverage==7.9.2',
+    'coverage==7.11.0',
     'ty==0.0.1a22',
 ]
 
