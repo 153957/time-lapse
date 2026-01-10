@@ -1,27 +1,24 @@
-.PHONY: ruffinstall
-ruffinstall:
-	uv pip install --upgrade -r requirements-ruff.txt
-
-.PHONY: devinstall
-devinstall:
-	uv pip install --upgrade --editable .[dev]
-
 .PHONY: test
-test: rufftest typingtest unittests
+test: rufftest typingtest unittest
 
 .PHONY: rufftest
 rufftest:
-	ruff check .
-	ruff format --check .
+	uv run ruff check .
+	uv run ruff format --check .
+
+.PHONY: rufffix
+rufftest:
+	uv run ruff check --fix-only .
+	uv run ruff format .
 
 .PHONY: typingtest
 typingtest:
-	ty check
+	uv run ty check
 
 .PHONY: unittest
 unittest:
-	coverage run -m unittest
-	coverage report
+	uv run coverage run -m unittest --durations 5
+	uv run coverage report
 
 .PHONY: clean
 clean:
