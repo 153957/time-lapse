@@ -9,9 +9,6 @@ jobs:
     steps:
       - uses: actions/checkout@v6
       - uses: astral-sh/setup-uv@v7
-        with:
-          python-version: '3.14'
-          activate-environment: true
       - run: make test
         env:
           RUFF_FORMAT: github
