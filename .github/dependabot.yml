@@ -7,7 +7,7 @@ updates:
       day: 'friday'
       time: '07:30'
 
-  - package-ecosystem: 'pip'
+  - package-ecosystem: 'uv'
     directory: '/'
     schedule:
       interval: 'weekly'
