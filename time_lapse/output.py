@@ -15,8 +15,9 @@ OUTPUT_OPTIONS: dict[str, str | int] = {
 def create_outputs(
     source_input: ffmpeg.nodes.FilterNode,
     name: str,
+    *streams,
     framerate: int | None = None,
-    watermark: bool | list[str] = True,
+    watermark: bool | tuple[str, str] = True,
     verbose: bool = False,
     dryrun: bool = False,
 ) -> ffmpeg.nodes.OutputNode:
@@ -24,6 +25,7 @@ def create_outputs(
 
     :param source_input: ffmpeg input node ready for scaling and conversion.
     :param name: name of the output.
+    :param streams: Additional streams (e.g. audio) to include in the output.
     :param watermark: if True the default watermark will be added to the movie,
         if a tuple is provided the contained strings are used for the main an sub lines.
     :param verbose: if True output the ffmpeg CLI command which will be used.
@@ -51,12 +53,12 @@ def create_outputs(
 
     output = ffmpeg.merge_outputs(
         # Fit into 1920x1920 (For 3:2 video: 1920x1280)
-        split_input[0].output(f'{name}.mp4', **output_options),
+        split_input[0].output(*streams, f'{name}.mp4', **output_options),
         # Fit into 960x960 (For 3:2 video: 960x640)
         (
             split_input[1]
             .filter_('scale', size='960x960', force_original_aspect_ratio='decrease')
-            .output(f'{name}_960.mp4', **output_options)
+            .output(*streams, f'{name}_960.mp4', **output_options)
         ),
     )
 
