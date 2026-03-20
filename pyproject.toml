@@ -41,9 +41,9 @@ graph = [
 
 [dependency-groups]
 dev = [
-    'coverage==7.13.4',
-    'ruff==0.15.1',
-    'ty==0.0.16',
+    'coverage==7.13.5',
+    'ruff==0.15.7',
+    'ty==0.0.24',
 ]
 
 [project.urls]
