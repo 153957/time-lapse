@@ -48,7 +48,7 @@ dev = [
 
 [project.urls]
 Homepage = 'https://arne.delaat.net/timelapse.html'
-Repository = 'https://github.com/153957/time-lapse'
+Repository = 'https://codeberg.org/153957/time-lapse/'
 
 [project.scripts]
 timelapse = 'time_lapse.cli:timelapse'
@@ -63,7 +63,6 @@ unresolved-attribute = 'ignore'
 
 [tool.ruff]
 line-length = 120
-target-version = 'py311'
 
 [tool.ruff.format]
 quote-style = 'single'  # Prefer single quotes, except for triple quotes strings
