@@ -41,7 +41,7 @@ By using graphviz the graph from input to output can be shown using:
 
 This package requires the `ffmpeg` tool to be installed.
 
-    brew install ffmpeg
+    brew install ffmpeg-full
 
 Then install this package:
 
