@@ -11,7 +11,7 @@ def make_movie(
     patterns: list[str] | str,
     fps: int,
     deflicker: int,
-    watermark: bool | list[str],
+    watermark: bool | tuple[str, str],
     verbose: bool,
     dryrun: bool,
     filters: list[tuple[str, dict[str, str]]] | None = None,
